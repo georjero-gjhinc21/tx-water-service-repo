@@ -454,6 +454,16 @@ export interface DashboardStats {
 
 // Rate calculation helper
 export interface RateCalculation {
+  // Calculated rates
+  waterRate: number;
+  trashRate: number;
+  recycleRate: number;
+  poolSurcharge: number;
+  subtotal: number;
+  estimatedTotal: number;
+  notes: string[];
+
+  // Base rates
   base_water_rate: number;
   trash_base_rate: number;
   recycle_base_rate: number;
