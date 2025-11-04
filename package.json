@@ -1,0 +1,68 @@
+{
+  "name": "tx-water-service-request",
+  "version": "1.0.0",
+  "description": "Texas Municipal Water Service Request Form - Complete Implementation",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:unit": "jest --testPathPattern=tests/unit",
+    "test:integration": "jest --testPathPattern=tests/integration",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "db:migrate": "node scripts/run-migrations.js",
+    "db:seed": "node scripts/seed-test-data.js",
+    "db:reset": "node scripts/reset-database.js",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.0",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "zod": "^3.22.4",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.18",
+    "@types/jest": "^29.5.11",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
+    "prettier": "^3.1.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/jest-dom": "^6.1.5",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/tx-water-service-request.git"
+  },
+  "keywords": [
+    "water-service",
+    "texas",
+    "municipal",
+    "utility",
+    "form",
+    "nextjs",
+    "typescript",
+    "supabase"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
