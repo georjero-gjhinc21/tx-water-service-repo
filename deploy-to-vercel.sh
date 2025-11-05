@@ -19,19 +19,20 @@ fi
 # Source environment variables
 source .env.local
 
-# Check if vercel CLI is installed
+# Check if vercel CLI is installed, use npx if not
 if ! command -v vercel &> /dev/null; then
-  echo "⚠️  Vercel CLI not found. Installing..."
-  npm i -g vercel
-  echo "✅ Vercel CLI installed"
+  echo "⚠️  Vercel CLI not found globally. Using npx vercel..."
+  VERCEL_CMD="npx vercel"
   echo ""
+else
+  VERCEL_CMD="vercel"
 fi
 
 # Check if logged in
 echo "🔍 Checking Vercel authentication..."
-if ! vercel whoami &> /dev/null; then
+if ! $VERCEL_CMD whoami &> /dev/null; then
   echo "⚠️  Not logged in to Vercel. Please login:"
-  vercel login
+  $VERCEL_CMD login
   echo ""
 fi
 
@@ -42,7 +43,7 @@ echo ""
 echo "🔗 Linking to Vercel project..."
 if [ ! -f .vercel/project.json ]; then
   echo "   This will link your local directory to your Vercel project"
-  vercel link
+  $VERCEL_CMD link --yes
 else
   echo "✅ Already linked to Vercel project"
 fi
@@ -61,10 +62,10 @@ add_env_var() {
   echo "   Adding $var_name to $environment..."
 
   # Remove existing variable if it exists (suppress errors)
-  vercel env rm "$var_name" "$environment" -y &> /dev/null || true
+  $VERCEL_CMD env rm "$var_name" "$environment" -y &> /dev/null || true
 
   # Add the variable
-  echo "$var_value" | vercel env add "$var_name" "$environment"
+  echo "$var_value" | $VERCEL_CMD env add "$var_name" "$environment"
 }
 
 # Add each variable to all environments
@@ -115,7 +116,7 @@ fi
 # Deploy to production
 echo "🚀 Deploying to production..."
 echo ""
-vercel --prod
+$VERCEL_CMD --prod
 
 echo ""
 echo "✅ Deployment complete!"
@@ -127,5 +128,5 @@ echo "3. Check Supabase Table Editor for the submitted data"
 echo "4. Access admin dashboard at: https://gjhtechs.com/admin/login"
 echo ""
 echo "🔍 Monitor deployment status:"
-echo "   vercel logs"
+echo "   $VERCEL_CMD logs"
 echo ""

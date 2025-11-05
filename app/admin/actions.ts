@@ -1,10 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createServerClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 
 export async function updateRequestStatus(id: string, status: string) {
-  const supabase = createServerClient();
+  const supabase = createServiceClient();
 
   await supabase
     .from("water_service_requests")
@@ -15,7 +15,7 @@ export async function updateRequestStatus(id: string, status: string) {
 }
 
 export async function deleteRequest(id: string) {
-  const supabase = createServerClient();
+  const supabase = createServiceClient();
 
   await supabase
     .from("water_service_requests")

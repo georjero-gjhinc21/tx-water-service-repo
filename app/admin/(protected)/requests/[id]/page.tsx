@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createServerClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 
 export default async function RequestDetailPage({ params }: { params: { id: string } }) {
-  const supabase = createServerClient();
+  const supabase = createServiceClient();
 
   const { data: request } = await supabase
     .from("water_service_requests")

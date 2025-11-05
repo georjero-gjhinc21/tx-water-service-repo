@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { createServerClient } from "@/lib/supabase/server";
+import { createServiceClient } from "@/lib/supabase/server";
 import { userIsAdmin } from "@/lib/admin";
 import { deleteRequest, updateRequestStatus } from "../actions";
 
@@ -16,7 +16,7 @@ export default async function AdminHome() {
     );
   }
 
-  const supabase = createServerClient();
+  const supabase = createServiceClient();
   const { data: requests } = await supabase
     .from("water_service_requests")
     .select(
