@@ -39,7 +39,7 @@ function ProgressBar({ step }: { step: number }) {
   );
 }
 
-export function MultiStepForm() {
+function MultiStepForm() {
   const [step, setStep] = useState(1);
   const [pending, setPending] = useState(false);
   const [toast, setToast] = useState<{
