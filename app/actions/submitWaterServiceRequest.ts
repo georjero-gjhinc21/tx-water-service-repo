@@ -1,12 +1,13 @@
 "use server";
 
-import { createServerClient } from '@/lib/supabase/server';
+import { createServiceClient } from '@/lib/supabase/server';
 import type { PropertyUseType, ServiceTerritory } from '@/types/water-service-request';
 import { calculateMonthlyRate, calculateDeposit } from '@/app/lib/calculations';
 
 export async function submitWaterServiceRequest(formData: FormData) {
   try {
-    const supabase = createServerClient();
+    // Use the service role client so server actions have permission to upload and insert
+    const supabase = createServiceClient();
 
     // Extract form data
     const data = {
