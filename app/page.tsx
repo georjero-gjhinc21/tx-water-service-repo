@@ -39,7 +39,7 @@ function ProgressBar({ step }: { step: number }) {
   );
 }
 
-export function MultiStepForm() {
+function MultiStepForm() {
   const [step, setStep] = useState(1);
   const [pending, setPending] = useState(false);
   const [toast, setToast] = useState<{
@@ -335,11 +335,18 @@ export function MultiStepForm() {
       fd.append("applicant_signature", applicantSignature);
       fd.append("co_applicant_signature", coApplicantSignature);
 
-      // For now, just show success
-      showToast("success", "Request submitted successfully! Redirecting...");
-      setTimeout(() => {
-        window.location.href = "/thanks";
-      }, 1500);
+      // Submit to server action
+      const { submitWaterServiceRequest } = await import('@/app/actions/submitWaterServiceRequest');
+      const result = await submitWaterServiceRequest(fd);
+
+      if (result.success) {
+        showToast("success", "Request submitted successfully! Redirecting...");
+        setTimeout(() => {
+          window.location.href = `/thanks?id=${result.id}`;
+        }, 1500);
+      } else {
+        showToast("error", result.error || "Failed to submit request. Please try again.");
+      }
 
     } catch (err) {
       console.error(err);
