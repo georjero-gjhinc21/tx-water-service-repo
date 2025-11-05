@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createServiceClient } from "@/lib/supabase/server";
+import DownloadPDFButton from "@/app/components/DownloadPDFButton";
 
 export default async function RequestDetailPage({ params }: { params: { id: string } }) {
   const supabase = createServiceClient();
@@ -24,9 +25,12 @@ export default async function RequestDetailPage({ params }: { params: { id: stri
           </Link>
           <h1 className="mt-2 text-2xl font-semibold">Request Details</h1>
         </div>
-        <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium">
-          {request.status}
-        </span>
+        <div className="flex items-center gap-3">
+          <DownloadPDFButton request={request} />
+          <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium">
+            {request.status}
+          </span>
+        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
