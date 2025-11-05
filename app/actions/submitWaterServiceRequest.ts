@@ -214,7 +214,8 @@ export async function submitWaterServiceRequest(formData: FormData) {
       console.error('Database insert error:', insertError);
       return {
         success: false,
-        error: 'Failed to save request. Please try again.',
+        error: `Failed to save request: ${insertError.message || 'Please try again.'}`,
+        details: insertError,
       };
     }
 
@@ -225,9 +226,11 @@ export async function submitWaterServiceRequest(formData: FormData) {
 
   } catch (error) {
     console.error('Server action error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return {
       success: false,
-      error: 'An unexpected error occurred. Please try again.',
+      error: `An unexpected error occurred: ${errorMessage}`,
+      details: error,
     };
   }
 }
