@@ -17,14 +17,18 @@ export function createServerClient() {
   );
 }
 
-// Service role client for admin operations (SSN encryption, etc.)
+// Service role client for admin operations (bypasses RLS)
 export function createServiceClient() {
+  const cookieStore = cookies();
+
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
       cookies: {
-        get() { return undefined; },
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
       },
     }
   );
